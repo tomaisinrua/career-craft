@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tommy Walsh — Career Craft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════ FIXED HUD: Slider Bar ═══════════ -->
+  <header id="slider-bar">
+    <div class="slider-row">
+      <label>⏱ <span id="current-year">1998</span></label>
+      <input type="range" id="timeline-slider" min="1998" max="2026" value="1998" step="0.5">
+      <span id="current-role" class="role-label">Press → to begin</span>
+    </div>
+    <div class="slider-row meters">
+      <div class="meter">
+        <label>⚡ XP</label>
+        <div class="meter-track"><div class="meter-fill xp-fill" id="xp-bar" style="width:0%"></div></div>
+      </div>
+      <div class="meter">
+        <label>😊 Joy</label>
+        <div class="meter-track"><div class="meter-fill joy-fill" id="joy-bar" style="width:50%"></div></div>
+      </div>
+      <div class="meter">
+        <label>🔧</label>
+        <span id="skills-count" class="skill-counter">0 / 19</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ GAME WORLD ═══════════ -->
+  <div id="world">
+
+    <!-- Parallax hill layers (SVG silhouettes) -->
+    <div id="bg-far" class="parallax-layer">
+      <svg class="hills-svg" viewBox="0 0 4000 260" preserveAspectRatio="none">
+        <path d="M0,260 L0,180 Q200,80 400,150 Q600,50 800,130 Q1000,40 1200,120
+                 Q1400,60 1600,140 Q1800,30 2000,110 Q2200,70 2400,150
+                 Q2600,40 2800,120 Q3000,60 3200,140 Q3400,50 3600,130 Q3800,80 4000,160 L4000,260Z"
+              fill="rgba(100,70,30,0.3)"/>
+      </svg>
+    </div>
+    <div id="bg-mid" class="parallax-layer">
+      <svg class="hills-svg" viewBox="0 0 4000 200" preserveAspectRatio="none">
+        <path d="M0,200 L0,140 Q150,90 300,130 Q500,60 700,110 Q900,70 1100,120
+                 Q1300,50 1500,100 Q1700,80 1900,130 Q2100,60 2300,110
+                 Q2500,70 2700,120 Q2900,50 3100,100 Q3300,80 3500,130 Q3700,60 4000,120 L4000,200Z"
+              fill="rgba(90,60,25,0.4)"/>
+      </svg>
+    </div>
+
+    <!-- Floating clouds -->
+    <div id="cloud-layer" class="parallax-layer">
+      <div class="cloud" style="top:12%; left:5%"></div>
+      <div class="cloud cloud-sm" style="top:8%; left:20%"></div>
+      <div class="cloud" style="top:18%; left:38%"></div>
+      <div class="cloud cloud-sm" style="top:10%; left:55%"></div>
+      <div class="cloud" style="top:15%; left:72%"></div>
+      <div class="cloud cloud-sm" style="top:6%; left:88%"></div>
+    </div>
+
+    <!-- ═══ Lego Tommy Character ═══ -->
+    <div id="character">
+      <img src="LegoT.png" alt="Tommy Walsh" draggable="false">
+      <div class="char-shadow"></div>
+    </div>
+
+    <!-- ═══ Horizontal Track ═══ -->
+    <div id="track">
+
+      <!-- INTRO -->
+      <section class="era era-intro sky-night">
+        <div class="era-content intro-content">
+          <div class="block-title">
+            <span class="block t">T</span><span class="block w">W</span>
+          </div>
+          <h2 class="pixel-subtitle">TOMMY WALSH</h2>
+          <p class="grandad-quote">"You've got two hands young lad, use them"</p>
+          <div class="scroll-hint">▶ Scroll to explore ▶</div>
+        </div>
+        <div class="era-ground ground-grass"></div>
+      </section>
+
+      <!-- ERA 1: Fennels Bar -->
+      <section class="era sky-night" data-year-start="1998" data-year-end="2002">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">1998 – 2002</h3>
+            <h2 class="era-title">Fennels Bar & Restaurant</h2>
+            <p class="era-role">Bartender · Kitchen Staff</p>
+            <p class="era-desc">Where it all began — a proper Dublin local. Four years pulling pints, running food, and managing a packed Friday house. Learned to read a room, handle pressure, and keep twenty things moving at once.</p>
+            <div class="era-stats">📍 Dublin &nbsp;|&nbsp; ⏱ 4 yrs &nbsp;|&nbsp; 🏎️ F1 Sundays on the telly</div>
+            <div class="skill-unlock" data-skill="Customer Service">🔓 <strong>Customer Service</strong></div>
+            <div class="skill-unlock" data-skill="Multitasking">🔓 <strong>Multitasking</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco pint-glass" style="bottom:100px;left:12%"></div>
+          <div class="deco pint-glass" style="bottom:100px;left:25%"></div>
+          <div class="deco pint-glass" style="bottom:105px;right:15%"></div>
+          <div class="deco pint-glass" style="bottom:100px;right:30%"></div>
+        </div>
+        <div class="era-ground ground-cobble"></div>
+      </section>
+
+      <!-- ERA 2: Walsh's Statoil -->
+      <section class="era sky-dawn" data-year-start="2002" data-year-end="2003">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2002 – 2003</h3>
+            <h2 class="era-title">Walsh's Statoil Station</h2>
+            <p class="era-role">Forecourt Attendant</p>
+            <p class="era-desc">The family business — one of hundreds of Statoil-branded forecourts across Ireland. The Norwegian oil giant acquired BP Ireland's network in 1992. Early mornings, all-weather shifts, stock management, cash reconciliation. The brand later became Topaz (2008) then Circle K (2016).</p>
+            <div class="era-stats">📍 Ireland &nbsp;|&nbsp; 🏢 Statoil (now Circle K) &nbsp;|&nbsp; ⏱ 1 yr</div>
+            <div class="skill-unlock" data-skill="Time Management">🔓 <strong>Time Management</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco petrol-pump" style="bottom:100px;left:10%"></div>
+          <div class="deco petrol-pump" style="bottom:100px;left:28%"></div>
+          <div class="deco petrol-pump" style="bottom:100px;right:12%"></div>
+        </div>
+        <div class="era-ground ground-asphalt"></div>
+      </section>
+
+      <!-- ERA 3: Dell -->
+      <section class="era sky-morning" data-year-start="2003" data-year-end="2005">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2003 – 2005</h3>
+            <h2 class="era-title">Dell Inc.</h2>
+            <p class="era-role">Manufacturer — Raheen Industrial Estate</p>
+            <p class="era-desc">First taste of the tech world, inside Dell's legendary Limerick plant — EMEA's manufacturing heartbeat since 1991, built in the old Atari factory. At its peak: 4,500 employees, Ireland's biggest exporter. Building PCs on the production line — learning every component, every connection.</p>
+            <div class="era-stats">📍 Limerick &nbsp;|&nbsp; 🏢 Dell (Raheen, est. 1991) &nbsp;|&nbsp; ⏱ 2 yrs</div>
+            <div class="skill-unlock" data-skill="PC Repair">🔓 <strong>PC Hardware & Assembly</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco pc-block" style="bottom:105px;left:8%"></div>
+          <div class="deco pc-block" style="bottom:105px;left:22%"></div>
+          <div class="deco pc-block" style="bottom:125px;left:15%"></div>
+          <div class="deco pc-block" style="bottom:105px;right:10%"></div>
+          <div class="deco pc-block" style="bottom:105px;right:25%"></div>
+        </div>
+        <div class="era-ground ground-concrete"></div>
+      </section>
+
+      <!-- ERA 4: JK WholeSale -->
+      <section class="era sky-dawn" data-year-start="2006" data-year-end="2007">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2006 – 2007</h3>
+            <h2 class="era-title">JK WholeSale</h2>
+            <p class="era-role">Fish Monger · Delivery Driver</p>
+            <p class="era-desc">Early starts, cold hands, and a crash course in logistics. Cutting, prepping, and delivering fresh fish across Dublin — market to customer before sunrise. The unglamorous side of supply chains.</p>
+            <div class="era-stats">📍 Dublin &nbsp;|&nbsp; 🐟 Fresh fish logistics &nbsp;|&nbsp; ⏱ 1 yr</div>
+            <div class="skill-unlock" data-skill="Logistics">🔓 <strong>Logistics</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco pixel-fish" style="bottom:140px;left:20%"></div>
+          <div class="deco pixel-fish" style="bottom:160px;right:25%"></div>
+          <div class="deco pixel-fish" style="bottom:130px;left:60%"></div>
+        </div>
+        <div class="era-ground ground-stone"></div>
+      </section>
+
+      <!-- ERA 5: Walsh Auto Repairs -->
+      <section class="era sky-overcast" data-year-start="2007" data-year-end="2008">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2007 – 2008</h3>
+            <h2 class="era-title">Walsh Auto Repairs</h2>
+            <p class="era-role">Trainee Mechanic</p>
+            <p class="era-desc">Back to the family workshop — Grandad's garage. Diagnostics, mechanics, systematic troubleshooting. Strip it down, find the fault, fix it, put it back together. The same problem-solving muscle that IT demands, just with engine grease instead of thermal paste.</p>
+            <div class="era-stats">📍 Ireland &nbsp;|&nbsp; 🔧 Family business &nbsp;|&nbsp; 🏎️ F1 in the garage radio</div>
+            <div class="skill-unlock" data-skill="Mechanics">🔓 <strong>Mechanics</strong></div>
+            <div class="skill-unlock" data-skill="Troubleshooting">🔓 <strong>Troubleshooting</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco pixel-wrench" style="bottom:110px;left:15%"></div>
+          <div class="deco pixel-wrench" style="bottom:105px;right:20%;transform:rotate(30deg)"></div>
+          <div class="deco f1-car" style="bottom:105px;left:70%"></div>
+        </div>
+        <div class="era-ground ground-concrete"></div>
+      </section>
+
+      <!-- ERA 6: Fishing (HERO — wider section) -->
+      <section class="era era-wide sky-ocean" data-year-start="2008" data-year-end="2015">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2008 – 2015</h3>
+            <h2 class="era-title">Commercial Fishing — Atlantic</h2>
+            <p class="era-role">Deckhand — Trawlers & Potters</p>
+            <p class="era-desc">Seven years on the North Atlantic. 4am starts, 16-hour days, Force 8 gales. Hauling nets, shooting pots, gutting catch — from inshore potting off the Clare coast to deep-sea trawling in the Celtic Sea. Weeks at sea, no phone signal, nothing but the job and the horizon. A chapter that shaped everything.</p>
+            <div class="era-stats">📍 Atlantic, Clare &nbsp;|&nbsp; 🌊 7 years at sea &nbsp;|&nbsp; 🎣 Hobby became the job</div>
+            <div class="skill-unlock" data-skill="Teamwork">🔓 <strong>Teamwork</strong></div>
+            <div class="skill-unlock" data-skill="Leadership">🔓 <strong>Leadership</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco pixel-boat" style="bottom:110px;left:8%"></div>
+          <div class="deco pixel-fish" style="bottom:180px;left:45%"></div>
+          <div class="deco pixel-fish" style="bottom:220px;left:60%;opacity:0.6"></div>
+          <div class="deco pixel-fish" style="bottom:160px;right:15%;opacity:0.7"></div>
+          <div class="deco pixel-fish" style="bottom:250px;right:30%;opacity:0.5"></div>
+          <div class="deco pixel-fish" style="bottom:190px;left:30%;opacity:0.8"></div>
+          <div class="deco fishing-rod" style="bottom:100px;right:10%"></div>
+        </div>
+        <div class="wave"></div>
+        <div class="era-ground ground-water"></div>
+      </section>
+
+      <!-- ERA 7: Emerald Group Marketing -->
+      <section class="era sky-day" data-year-start="2015" data-year-end="2016">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2015 – 2016</h3>
+            <h2 class="era-title">Emerald Group Marketing</h2>
+            <p class="era-role">Field Sales Agent</p>
+            <p class="era-desc">Coming ashore and pivoting hard. EMG Sales — Ireland's leading outsourced direct sales operation. Door-to-door, face-to-face, rain or shine across Dublin. Learning to communicate value in 30 seconds and handle rejection gracefully.</p>
+            <div class="era-stats">📍 Dublin &nbsp;|&nbsp; 🏢 EMG Sales (est. 1995) &nbsp;|&nbsp; 🏎️ F1 weekends</div>
+            <div class="skill-unlock" data-skill="CRM">🔓 <strong>CRM & Sales</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco pixel-door" style="bottom:100px;left:12%"></div>
+          <div class="deco pixel-door" style="bottom:100px;left:30%"></div>
+          <div class="deco pixel-door" style="bottom:100px;right:15%"></div>
+          <div class="deco pixel-clipboard" style="bottom:110px;right:35%"></div>
+        </div>
+        <div class="era-ground ground-grass"></div>
+      </section>
+
+      <!-- ERA 8: Field Management Ireland -->
+      <section class="era sky-dusk" data-year-start="2016" data-year-end="2017">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2016 – 2017</h3>
+            <h2 class="era-title">Field Management Ireland</h2>
+            <p class="era-role">Contact Centre Rep · Account Executive</p>
+            <p class="era-desc">Moving from field to phone at FMI — Dublin's premier field management and contact centre company, est. 1995, Dundrum Business Park. Account management, data entry, CRM systems. The transition from hands to headset.</p>
+            <div class="era-stats">📍 Dundrum, Dublin 14 &nbsp;|&nbsp; 🏢 FMI (est. 1995) &nbsp;|&nbsp; ⏱ 1 yr</div>
+            <div class="skill-unlock" data-skill="Microsoft Office">🔓 <strong>Microsoft Office</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco pixel-headset" style="bottom:115px;left:15%"></div>
+          <div class="deco pixel-headset" style="bottom:110px;right:20%"></div>
+          <div class="deco pc-block" style="bottom:105px;left:35%"></div>
+          <div class="deco pc-block" style="bottom:105px;right:40%"></div>
+        </div>
+        <div class="era-ground ground-office"></div>
+      </section>
+
+      <!-- ERA 9: ICT Services @ Microsoft -->
+      <section class="era sky-bright" data-year-start="2018" data-year-end="2019">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2018 – 2019</h3>
+            <h2 class="era-title">ICT Services @ Microsoft</h2>
+            <p class="era-role">IT Support Tech — AVLink SME — TechLink</p>
+            <p class="era-desc">The door opens. ICT Services (formerly JLS Technology, spun from Unisys Ireland in 1997) held the Microsoft onsite contract. Walking into the Dublin campus — AV systems, Crestron panels, Cisco endpoints. Every skill from every previous job suddenly clicks into place.</p>
+            <div class="era-stats">📍 Microsoft Dublin &nbsp;|&nbsp; 🏢 ICT Services (est. 1997) &nbsp;|&nbsp; ⏱ 1 yr</div>
+            <div class="skill-unlock" data-skill="AV">🔓 <strong>AV / Audiovisual</strong></div>
+            <div class="skill-unlock" data-skill="Crestron Systems">🔓 <strong>Crestron</strong></div>
+            <div class="skill-unlock" data-skill="Cisco Systems">🔓 <strong>Cisco</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco server-rack" style="bottom:100px;left:5%"></div>
+          <div class="deco pixel-panel" style="bottom:110px;left:25%"></div>
+          <div class="deco pixel-switch" style="bottom:105px;right:10%"></div>
+          <div class="deco pixel-switch" style="bottom:120px;right:10%"></div>
+          <div class="deco server-rack" style="bottom:100px;right:25%"></div>
+        </div>
+        <div class="era-ground ground-ms"></div>
+      </section>
+
+      <!-- ERA 10: Auxilion Jr -->
+      <section class="era sky-bright" data-year-start="2019" data-year-end="2020">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2019 – 2020</h3>
+            <h2 class="era-title">Auxilion @ Microsoft</h2>
+            <p class="era-role">Jr Site Operations Specialist — CSEO</p>
+            <p class="era-desc">Stepping up. Auxilion — Dublin-founded managed IT services provider (est. 2012). Global Microsoft Partner of the Year 2014. Expanded scope: cable rooms, network infrastructure, cross-team CSEO coordination.</p>
+            <div class="era-stats">📍 Microsoft Dublin &nbsp;|&nbsp; 🏢 Auxilion (est. 2012) &nbsp;|&nbsp; ⏱ 1 yr</div>
+            <div class="skill-unlock" data-skill="Site Operations">🔓 <strong>Site Operations</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco server-rack" style="bottom:100px;left:4%"></div>
+          <div class="deco server-rack" style="bottom:100px;right:6%"></div>
+          <div class="deco pixel-switch" style="bottom:105px;left:22%"></div>
+          <div class="deco pixel-switch" style="bottom:120px;left:22%"></div>
+          <div class="deco pixel-panel" style="bottom:110px;right:30%"></div>
+        </div>
+        <div class="era-ground ground-ms"></div>
+      </section>
+
+      <!-- ERA 11: Auxilion Senior (COVID) -->
+      <section class="era sky-grey" data-year-start="2020" data-year-end="2021">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2020 – 2021</h3>
+            <h2 class="era-title">Auxilion @ Microsoft</h2>
+            <p class="era-role">Site Operations Specialist — CSEO</p>
+            <p class="era-desc">Promoted to senior. COVID-19 hits — the campus goes quiet but the work doesn't stop. Remote support, essential onsite operations, keeping infrastructure alive for a workforce that went fully remote overnight. Crisis management in an empty building.</p>
+            <div class="era-stats">📍 Microsoft Dublin &nbsp;|&nbsp; 🦠 COVID-era ops &nbsp;|&nbsp; 🏎️ F1 at home</div>
+            <div class="skill-unlock" data-skill="Windows">🔓 <strong>Windows Administration</strong></div>
+            <div class="skill-unlock" data-skill="PowerShell">🔓 <strong>PowerShell & Scripting</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco server-rack" style="bottom:100px;left:5%"></div>
+          <div class="deco server-rack" style="bottom:100px;left:16%"></div>
+          <div class="deco server-rack" style="bottom:100px;right:8%"></div>
+          <div class="deco pixel-panel" style="bottom:110px;left:35%"></div>
+        </div>
+        <div class="era-ground ground-ms-dark"></div>
+      </section>
+
+      <!-- ERA 12: Unisys @ Microsoft -->
+      <section class="era era-wide sky-tech" data-year-start="2021" data-year-end="2025">
+        <div class="era-content">
+          <div class="era-card">
+            <h3 class="era-dates">2021 – 2025</h3>
+            <h2 class="era-title">Unisys @ Microsoft</h2>
+            <p class="era-role">Site Operations → Team Lead — CSEO</p>
+            <p class="era-desc">Contract transitions to Unisys — a global IT services heavyweight (NYSE: UIS, est. 1986). Four years of growth. From senior technician to leading teams across Dublin, London, Reading, Oslo, and Stockholm. Network SME. Building automation in PowerShell, driving SOPs across ServiceNow.</p>
+            <div class="era-stats">📍 Dublin · London · Reading · Oslo · Stockholm &nbsp;|&nbsp; 🏋️ Gym era begins &nbsp;|&nbsp; 🏃 Running</div>
+            <div class="skill-unlock" data-skill="Networking">🔓 <strong>Network SME</strong></div>
+            <div class="skill-unlock" data-skill="ServiceNow">🔓 <strong>ServiceNow</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco server-rack" style="bottom:100px;left:3%"></div>
+          <div class="deco server-rack" style="bottom:100px;left:12%"></div>
+          <div class="deco server-rack" style="bottom:100px;right:5%"></div>
+          <div class="deco server-rack" style="bottom:100px;right:15%"></div>
+          <div class="deco pixel-switch" style="bottom:105px;left:25%"></div>
+          <div class="deco pixel-switch" style="bottom:120px;left:25%"></div>
+          <div class="deco pixel-switch" style="bottom:105px;right:30%"></div>
+          <div class="deco pixel-switch" style="bottom:120px;right:30%"></div>
+          <div class="deco pixel-panel" style="bottom:110px;left:40%"></div>
+          <div class="deco dumbbell" style="bottom:105px;right:45%"></div>
+        </div>
+        <div class="era-ground ground-ms"></div>
+      </section>
+
+      <!-- ERA 13: Wipro @ Microsoft -->
+      <section class="era sky-vivid" data-year-start="2025" data-year-end="2026">
+        <div class="era-content">
+          <div class="era-card era-card-current">
+            <h3 class="era-dates">2025 – Present</h3>
+            <h2 class="era-title">Wipro @ Microsoft</h2>
+            <p class="era-role">Team Lead — GS Onsite EMEA</p>
+            <p class="era-desc">The current chapter. Wipro (NYSE: WIT) takes the reins — a $12B global IT services giant and Microsoft's strategic "Frontier Firm" partner. Leading GS Onsite across Ireland, UK, Norway, and Sweden. Building tools with AI and Copilot, driving data-led ops, and still troubleshooting — because that's the bit I love.</p>
+            <div class="era-stats">📍 Dublin · London · Reading · Oslo · Stockholm &nbsp;|&nbsp; 🤖 AI-first &nbsp;|&nbsp; 🏋️ Gym · 🏃 Running · 🏎️ F1</div>
+            <div class="skill-unlock" data-skill="AI & Automation">🔓 <strong>AI & Automation</strong></div>
+          </div>
+        </div>
+        <div class="era-deco">
+          <div class="deco server-rack" style="bottom:100px;left:3%"></div>
+          <div class="deco server-rack" style="bottom:100px;left:11%"></div>
+          <div class="deco server-rack" style="bottom:100px;right:4%"></div>
+          <div class="deco server-rack" style="bottom:100px;right:13%"></div>
+          <div class="deco pixel-panel" style="bottom:110px;left:25%"></div>
+          <div class="deco pixel-panel" style="bottom:110px;right:28%"></div>
+          <div class="deco pixel-switch" style="bottom:105px;left:40%"></div>
+          <div class="deco pixel-switch" style="bottom:120px;left:40%"></div>
+          <div class="deco dumbbell" style="bottom:105px;right:45%"></div>
+          <div class="deco f1-car" style="bottom:105px;left:55%"></div>
+        </div>
+        <div class="era-ground ground-ms-bright"></div>
+      </section>
+
+    </div><!-- /track -->
+  </div><!-- /world -->
+
+  <!-- ═══════════ FIXED HUD: Skill Inventory ═══════════ -->
+  <footer id="skill-inventory">
+    <div class="inv-slot" data-skill="Customer Service" title="Customer Service">🍺</div>
+    <div class="inv-slot" data-skill="Multitasking" title="Multitasking">🔀</div>
+    <div class="inv-slot" data-skill="Time Management" title="Time Management">⏰</div>
+    <div class="inv-slot" data-skill="PC Repair" title="PC Hardware">🖥️</div>
+    <div class="inv-slot" data-skill="Logistics" title="Logistics">📦</div>
+    <div class="inv-slot" data-skill="Mechanics" title="Mechanics">🔧</div>
+    <div class="inv-slot" data-skill="Troubleshooting" title="Troubleshooting">🔍</div>
+    <div class="inv-slot" data-skill="Teamwork" title="Teamwork">🤝</div>
+    <div class="inv-slot" data-skill="Leadership" title="Leadership">👑</div>
+    <div class="inv-slot" data-skill="CRM" title="CRM & Sales">📊</div>
+    <div class="inv-slot" data-skill="Microsoft Office" title="Microsoft Office">📎</div>
+    <div class="inv-slot" data-skill="AV" title="AV">🎥</div>
+    <div class="inv-slot" data-skill="Crestron Systems" title="Crestron">🎛️</div>
+    <div class="inv-slot" data-skill="Cisco Systems" title="Cisco">🌐</div>
+    <div class="inv-slot" data-skill="Site Operations" title="Site Ops">🏢</div>
+    <div class="inv-slot" data-skill="Windows" title="Windows">💻</div>
+    <div class="inv-slot" data-skill="Networking" title="Network SME">🔌</div>
+    <div class="inv-slot" data-skill="ServiceNow" title="ServiceNow">📋</div>
+    <div class="inv-slot" data-skill="AI & Automation" title="AI & Automation">🤖</div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
