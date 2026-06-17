@@ -225,7 +225,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .era-wide { width: 160vw; }
@@ -824,18 +824,20 @@ body {
 /* Red ribbon banner (per section header) */
 .ribbon-banner {
   position: absolute;
-  top: 16px;
+  top: 55px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
   background: #d32f2f;
   color: #fff;
   font-family: var(--body-font);
-  font-size: 26px;
+  font-size: 28px;
+  font-weight: 700;
   font-style: italic;
-  padding: 6px 28px;
+  padding: 10px 36px;
   white-space: nowrap;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 .ribbon-banner::before, .ribbon-banner::after {
   content: '';
@@ -1087,6 +1089,12 @@ body {
   animation: aiFloat var(--ai-dur,5s) ease-in-out infinite var(--ai-del,0s);
 }
 @keyframes aiFloat { 0%,100%{transform:translateY(0) scale(1);opacity:.2} 50%{transform:translateY(-35px) scale(1.4);opacity:.8} }
+
+@keyframes aiBubbleRise {
+  0%   { transform: translateY(0); opacity: 0.3; }
+  50%  { opacity: 0.6; }
+  100% { transform: translateY(-200px); opacity: 0; }
+}
 
 /* ═══ Responsive ═══ */
 @media (max-width: 768px) {
