@@ -331,6 +331,21 @@ body {
   margin-bottom: 40px;
 }
 
+.intro-tagline {
+  font-family: var(--body-font);
+  font-size: 16px;
+  color: #aac8e8;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.era-card-about {
+  max-width: 500px;
+  background: rgba(10,15,30,0.88);
+  border: 2px solid rgba(64,184,248,0.3);
+  box-shadow: 0 0 20px rgba(64,184,248,0.1);
+}
+
 .scroll-hint {
   font-family: var(--pixel-font);
   font-size: 11px;
@@ -1094,6 +1109,140 @@ body {
   0%   { transform: translateY(0); opacity: 0.3; }
   50%  { opacity: 0.6; }
   100% { transform: translateY(-200px); opacity: 0; }
+}
+
+/* ═══ SKY ELEMENTS ═══ */
+
+/* Flying birds (V-shape) */
+.sky-bird {
+  position: absolute;
+  width: 18px; height: 6px;
+  z-index: 3;
+  animation: birdFly 4s ease-in-out infinite;
+}
+.sky-bird::before, .sky-bird::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 9px; height: 3px;
+  background: #333;
+  border-radius: 50% 50% 0 0;
+}
+.sky-bird::before { left: 0; transform: rotate(-20deg); }
+.sky-bird::after  { right: 0; transform: rotate(20deg); }
+@keyframes birdFly {
+  0%,100% { transform: translateY(0) translateX(0); }
+  25%     { transform: translateY(-8px) translateX(12px); }
+  75%     { transform: translateY(4px) translateX(-8px); }
+}
+
+/* Sun */
+.sky-sun {
+  position: absolute;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, #ffe066 30%, rgba(255,200,50,0.4) 60%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 40px rgba(255,200,50,0.3);
+}
+
+/* Moon */
+.sky-moon {
+  position: absolute;
+  width: 50px; height: 50px;
+  background: radial-gradient(circle at 35% 35%, #f5f5dc 40%, #ddd 70%, rgba(200,200,180,0.5) 100%);
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 30px rgba(255,255,200,0.2);
+}
+
+/* Shooting star */
+.shooting-star {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 2;
+  animation: shootStar 4s linear infinite;
+}
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 100%;
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7));
+}
+@keyframes shootStar {
+  0%   { transform: translate(0,0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  40%  { transform: translate(150px, 80px) scale(0.5); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Kite */
+.sky-kite {
+  position: absolute;
+  width: 0; height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 20px solid #e74c3c;
+  z-index: 3;
+  animation: kiteSway 3s ease-in-out infinite;
+}
+.sky-kite::after {
+  content: '';
+  position: absolute;
+  top: 20px; left: -1px;
+  width: 2px; height: 80px;
+  background: linear-gradient(180deg, #666, transparent);
+  transform-origin: top;
+  animation: kiteString 3s ease-in-out infinite;
+}
+@keyframes kiteSway { 0%,100%{transform:rotate(-5deg) translateY(0)} 50%{transform:rotate(5deg) translateY(-10px)} }
+@keyframes kiteString { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+
+/* Butterfly */
+.sky-butterfly {
+  position: absolute;
+  width: 12px; height: 8px;
+  z-index: 3;
+  animation: butterflyFlit 5s ease-in-out infinite;
+}
+.sky-butterfly::before, .sky-butterfly::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 6px; height: 8px;
+  border-radius: 50%;
+  animation: wingFlap 0.4s ease-in-out infinite;
+}
+.sky-butterfly::before { left: 0; background: #ff7043; transform-origin: right center; }
+.sky-butterfly::after  { right: 0; background: #ff9800; transform-origin: left center; animation-delay: 0.05s; }
+@keyframes butterflyFlit { 0%,100%{transform:translate(0,0)} 25%{transform:translate(20px,-15px)} 50%{transform:translate(-10px,-8px)} 75%{transform:translate(15px,5px)} }
+@keyframes wingFlap { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(0.3)} }
+
+/* Firework burst */
+.firework-burst {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  z-index: 3;
+  animation: fwBurst 3s ease-out infinite;
+  box-shadow:
+    0 -20px 0 var(--fw-color, #ff4444),
+    14px -14px 0 var(--fw-color, #ff4444),
+    20px 0 0 var(--fw-color, #ff4444),
+    14px 14px 0 var(--fw-color, #ff4444),
+    0 20px 0 var(--fw-color, #ff4444),
+    -14px 14px 0 var(--fw-color, #ff4444),
+    -20px 0 0 var(--fw-color, #ff4444),
+    -14px -14px 0 var(--fw-color, #ff4444);
+}
+@keyframes fwBurst {
+  0%   { transform: scale(0); opacity: 0; }
+  20%  { transform: scale(0.3); opacity: 1; }
+  50%  { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
 }
 
 /* ═══ Responsive ═══ */
