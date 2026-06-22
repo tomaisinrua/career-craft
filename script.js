@@ -7,8 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ── Era Data ────────────────────────────────────────── */
 const ERAS = [
-  { start: 1995, end: 1998, xp: 0,   joy: 50,  role: 'Tommy Walsh — Dublin' },           // Intro
+  { start: 1995, end: 1998, xp: 0,   joy: 50,  role: 'Tommy Walsh — Clare' },              // Intro
   { start: 1995, end: 1998, xp: 2,   joy: 55,  role: 'About Me' },                        // About
+  { start: 1995, end: 1998, xp: 3,   joy: 60,  role: 'Home — Carrigaholt, Loop Head' },   // Home
   { start: 1998, end: 2002, xp: 8,   joy: 65,  role: 'Fennels Bar — Bartender' },
   { start: 2002, end: 2003, xp: 12,  joy: 50,  role: 'Statoil — Forecourt' },
   { start: 2003, end: 2005, xp: 18,  joy: 55,  role: 'Dell — Manufacturer' },
@@ -92,6 +93,17 @@ gsap.to('#cloud-layer', {
   },
 });
 
+gsap.to('#game-deco-layer', {
+  x: () => -totalMove() * 0.45,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#world',
+    scrub: true,
+    end: () => '+=' + track.scrollWidth,
+    invalidateOnRefresh: true,
+  },
+});
+
 /* ── 3. ERA CARD REVEALS ─────────────────────────────── */
 document.querySelectorAll('.era-card').forEach(card => {
   gsap.from(card, {
@@ -144,7 +156,7 @@ function detectWalk(self) {
   if (Math.abs(self.getVelocity()) > 30) {
     character.classList.add('walking');
     clearTimeout(walkTimeout);
-    walkTimeout = setTimeout(() => character.classList.remove('walking'), 180);
+    walkTimeout = setTimeout(() => character.classList.remove('walking'), 250);
   }
 }
 

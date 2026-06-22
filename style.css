@@ -122,6 +122,7 @@ body {
 #bg-far { width: 300%; z-index: 1; }
 #bg-mid { width: 300%; z-index: 2; }
 #cloud-layer { width: 250%; z-index: 3; }
+#game-deco-layer { width: 200%; z-index: 4; }
 
 .hills-svg {
   position: absolute;
@@ -172,6 +173,11 @@ body {
   flex-direction: column;
   align-items: center;
   pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+#character.walking {
+  transform: rotate(2deg) translateX(2px);
 }
 
 #character img {
@@ -191,21 +197,67 @@ body {
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-/* Walk bounce */
+/* Walk animation — stepping motion with lean and arm swing */
 #character.walking img {
-  animation: walkBounce 0.35s ease-in-out infinite;
+  animation: walkStep 0.5s ease-in-out infinite;
 }
 #character.walking .char-shadow {
-  animation: shadowPulse 0.35s ease-in-out infinite;
+  animation: shadowStep 0.5s ease-in-out infinite;
 }
 
-@keyframes walkBounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-10px) rotate(1.5deg); }
+/* Arm swing overlays */
+#character::before,
+#character::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 28px;
+  background: #cc9900;
+  border-radius: 4px;
+  bottom: 50px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
 }
-@keyframes shadowPulse {
-  0%, 100% { transform: scale(1);   opacity: 0.25; }
-  50%      { transform: scale(0.7); opacity: 0.12; }
+#character::before { left: 28px; transform-origin: top center; }
+#character::after  { right: 28px; transform-origin: top center; }
+
+#character.walking::before,
+#character.walking::after {
+  opacity: 1;
+}
+#character.walking::before {
+  animation: armSwingLeft 0.5s ease-in-out infinite;
+}
+#character.walking::after {
+  animation: armSwingRight 0.5s ease-in-out infinite;
+}
+
+@keyframes walkStep {
+  0%   { transform: translateY(0) rotate(0deg) translateX(0); }
+  15%  { transform: translateY(-8px) rotate(-2.5deg) translateX(-2px); }
+  30%  { transform: translateY(-2px) rotate(-1deg) translateX(0); }
+  50%  { transform: translateY(0) rotate(0deg) translateX(0); }
+  65%  { transform: translateY(-8px) rotate(2.5deg) translateX(2px); }
+  80%  { transform: translateY(-2px) rotate(1deg) translateX(0); }
+  100% { transform: translateY(0) rotate(0deg) translateX(0); }
+}
+
+@keyframes shadowStep {
+  0%, 50%, 100% { transform: scale(1);    opacity: 0.25; }
+  15%, 65%      { transform: scale(0.65); opacity: 0.1; }
+  30%, 80%      { transform: scale(0.9);  opacity: 0.2; }
+}
+
+@keyframes armSwingLeft {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(25deg); }
+  75%      { transform: rotate(-20deg); }
+}
+
+@keyframes armSwingRight {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-20deg); }
+  75%      { transform: rotate(25deg); }
 }
 
 /* ═══ HORIZONTAL TRACK ═══ */
@@ -763,6 +815,129 @@ body {
 }
 .dumbbell::before { left: -4px; }
 .dumbbell::after  { right: -4px; }
+
+/* Pixel tree — classic platformer style */
+.pixel-tree {
+  width: 30px; height: 55px;
+  position: absolute;
+}
+.pixel-tree::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 10px; height: 20px;
+  background: #6B4226;
+  border: 2px solid #4a2e18;
+}
+.pixel-tree::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 30px; height: 38px;
+  background: #3a8c28;
+  border-radius: 50% 50% 8px 8px;
+  border: 3px solid #2d6b1f;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.15), inset 3px 3px 0 rgba(255,255,255,0.1);
+}
+.pixel-tree.tree-sm { width: 20px; height: 40px; }
+.pixel-tree.tree-sm::before { width: 7px; height: 14px; }
+.pixel-tree.tree-sm::after { width: 20px; height: 28px; }
+.pixel-tree.tree-tall { width: 36px; height: 72px; }
+.pixel-tree.tree-tall::before { width: 12px; height: 26px; }
+.pixel-tree.tree-tall::after { width: 36px; height: 50px; }
+
+/* Pixel castle — Carrigaholt tower */
+.pixel-castle {
+  width: 60px; height: 85px;
+  background: #8a8a7a;
+  border: 3px solid #6a6a5a;
+  position: relative;
+  box-shadow: inset -4px -4px 0 rgba(0,0,0,0.2), inset 4px 4px 0 rgba(255,255,255,0.08);
+}
+.pixel-castle::before {
+  content: '';
+  position: absolute;
+  top: -14px; left: 0; right: 0;
+  height: 14px;
+  background:
+    repeating-linear-gradient(90deg,
+      #8a8a7a 0px, #8a8a7a 10px,
+      transparent 10px, transparent 16px);
+  border-top: 3px solid #6a6a5a;
+  border-left: 3px solid #6a6a5a;
+  border-right: 3px solid #6a6a5a;
+}
+.pixel-castle::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 50%; transform: translateX(-50%);
+  width: 16px; height: 26px;
+  background: #3a3020;
+  border: 2px solid #2a2018;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Pixel bush — filler foliage */
+.pixel-bush {
+  width: 28px; height: 18px;
+  background: #4a9030;
+  border-radius: 50%;
+  border: 2px solid #3a7024;
+  box-shadow: inset -2px -2px 0 rgba(0,0,0,0.15);
+}
+.pixel-bush.bush-sm { width: 18px; height: 12px; }
+
+/* Pixel coin — floating game collectible */
+.pixel-coin {
+  width: 16px; height: 16px;
+  background: var(--joy-gold);
+  border: 2px solid #c4a000;
+  border-radius: 50%;
+  box-shadow: inset -2px -2px 0 rgba(0,0,0,0.2), inset 2px 2px 0 rgba(255,255,255,0.3);
+  animation: coinFloat 3s ease-in-out infinite;
+}
+@keyframes coinFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Question block — game power-up */
+.pixel-qblock {
+  width: 28px; height: 28px;
+  background: #e8a820;
+  border: 3px solid #b87800;
+  box-shadow: inset -3px -3px 0 rgba(0,0,0,0.25), inset 3px 3px 0 rgba(255,255,255,0.2);
+  position: relative;
+}
+.pixel-qblock::after {
+  content: '?';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+}
+
+/* Pixel pipe — Mario-style warp pipe */
+.pixel-pipe {
+  width: 36px; height: 48px;
+  background: #2d8c2d;
+  border: 3px solid #1a6b1a;
+  border-radius: 2px;
+}
+.pixel-pipe::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: -4px; right: -4px;
+  height: 12px;
+  background: #2d8c2d;
+  border: 3px solid #1a6b1a;
+  border-radius: 3px;
+}
 
 /* ═══ Skill Inventory (Minecraft Hotbar) ═══ */
 #skill-inventory {
